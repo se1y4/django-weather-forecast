@@ -32,6 +32,12 @@ def index(request):
             else:
                 weather_data = {'error': 'Город не найден!'}
 
+    lat = request.GET.get('lat')
+    lon = request.GET.get('lon')
+    if lat and lon:
+        data = get_weather_data(lat, lon)
+        weather_data = prepare_weather_data(data)
+
     selected_city = request.GET.get('selected_city')
     if selected_city:
         cities = City.objects.filter(Q(city__iexact=selected_city) | Q(city_rus__iexact=selected_city))
@@ -101,7 +107,6 @@ def get_city_by_coords(request):
         
         return JsonResponse({
             'weather_data': weather_data,
-            'is_coords_based': True
         }, status=200)
     
     return JsonResponse({'error': 'Метод не разрешен'}, status=405)
