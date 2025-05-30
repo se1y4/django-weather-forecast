@@ -30,5 +30,5 @@ cd django-weather-forecast
 Запустите контейнер:
 ```bash
 docker-compose up --build  
-Приложение будет доступно по адресу: http://localhost:8080
 ```
+Приложение будет доступно по адресу: http://localhost:8080
